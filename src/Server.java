@@ -7,61 +7,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
-class JSON {
-    private HashMap<String, String> json;
-
-    JSON(){
-        json = new HashMap<>();
-    }
-
-    void add(String key, String value){
-        json.put(key, value);
-    }
-
-    String get(String key){
-        return json.get(key);
-    }
-
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        for (String s : json.values()){
-            sb.append(s).append(' ');
-        }
-        sb.deleteCharAt(sb.length()-1);
-        return sb.toString();
-    }
-}
-
-class FileManager {
-    void write(String filename, String text) {
-        File file = new File(filename);
-        try (PrintWriter out = new PrintWriter(file.getAbsoluteFile())) {
-            out.print(text);
-        }
-        catch (IOException e) {
-            System.out.println("Exception: " + e);
-        }
-    }
-
-    void update(String filename, String newText) {
-        StringBuilder sb = new StringBuilder();
-        File file = new File(filename);
-        try (BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()))) {
-            String s;
-            while ((s = in.readLine()) != null) {
-                sb.append(s).append('\n');
-            }
-        } catch (IOException e) {
-            System.out.println("Exception: " + e);
-        }
-        String oldFile = sb.toString();
-        sb.setLength(0);
-        sb.append(oldFile);
-        sb.append(newText);
-        write(filename, sb.toString());
-    }
-}
-
 public class Server extends Thread {
     private static final int messagePort = 45777;
     private static final int filePort = 45778;
@@ -430,11 +375,11 @@ public class Server extends Thread {
 
     public static void main(String[] args) throws IOException {
         File file = new File("messages.txt");
-        if (!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         file = new File("files.txt");
-        if (!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         makeServerSocketForPort(messagePort);

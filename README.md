@@ -1,4 +1,4 @@
-# Client-Server-application-INFOTECS
+# ClientServer_application_INFOTECS
 
 Multithreaded server:
 
